@@ -1,92 +1,106 @@
 <template>
-  <div class="p-6">
-    <h2 class="text-2xl font-bold mb-6">Tableau de bord</h2>
-
-    <!-- Statistiques principales -->
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-  <div
-    v-for="card in statsCards"
-    :key="card.label"
-    class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 flex items-center gap-4 transition hover:shadow-lg"
-  >
-    <!-- Icône -->
-    <div
-      class="w-14 h-14 rounded-xl flex items-center justify-center text-white text-2xl shadow"
-      :class="card.bg"
-    >
-      <component :is="card.icon" class="w-7 h-7" />
-    </div>
-
-    <!-- Textes -->
-    <div>
-      <h3 class="text-3xl font-bold text-gray-900 dark:text-white">{{ card.value }}</h3>
-      <p class="text-gray-500 dark:text-gray-300 text-sm">{{ card.label }}</p>
-
-      <div class="flex items-center gap-1 text-green-600 dark:text-green-400 text-xs mt-1">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-4 h-4"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
+  <div class="p-4 md:p-8">
+    
+    <h2 class="text-3xl font-light text-white border-l-4 border-[#4C70FF] pl-4 mb-10 tracking-wider">
+      Tableau de Bord
+    </h2>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+      
+      <div
+        v-for="card in statsCards"
+        :key="card.label"
+        class="bg-[#131326] rounded-xl shadow-2xl p-5 flex items-center gap-4 
+               transition-all duration-300 transform hover:scale-[1.02] cursor-pointer 
+               border border-[#20203D]"
+      >
+        <div
+          class="w-16 h-16 rounded-full flex items-center justify-center text-white text-2xl 
+                 shadow-lg"
+          :class="[
+            card.bg,
+            card.label.includes('Chiffre d') ? 'shadow-blue-500/50' : 
+            card.label.includes('Commandes') ? 'shadow-indigo-500/50' : 
+            'shadow-gray-500/50'
+          ]"
         >
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M5 10l7-7m0 0l7 7m-7-7v18" />
-        </svg>
-        <span>+0% ce mois</span>
+          <component :is="card.icon" class="w-8 h-8" />
+        </div>
+
+        <div>
+          <h3 class="text-4xl font-extrabold text-white">{{ card.value }}</h3>
+          <p class="text-gray-400 text-sm mt-0.5">{{ card.label }}</p>
+
+          <div class="flex items-center gap-1 text-green-400 text-xs mt-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-4 h-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M5 10l7-7m0 0l7 7m-7-7v18" />
+            </svg>
+            <span>+0% ce mois</span>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
+    <hr class="border-t border-[#20203D] my-10" />
 
-    <!-- Liste des dernières commandes -->
-    <div class="bg-white rounded shadow p-4 mt-10">
-      <div class="flex justify-between items-center mb-3">
-        <h3 class="text-lg font-semibold">Dernières commandes</h3>
+    <div class="bg-[#131326] rounded-xl shadow-2xl p-6 md:p-8">
+      
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-xl font-semibold text-white">Dernières Commandes</h3>
         <RouterLink
           to="/commandes"
-          class="text-blue-600 hover:underline text-sm"
+          class="text-[#4C70FF] hover:text-indigo-400 hover:underline text-sm font-medium transition duration-150"
         >
-          Voir tout
+          Voir tout →
         </RouterLink>
       </div>
 
-      <table class="w-full">
-        <thead class="bg-gray-100">
-          <tr class="text-left">
-            <th class="p-2">Numéro</th>
-            <th class="p-2">Chauffeur</th>
-            <th class="p-2">Destination</th>
-            <th class="p-2">Statut</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            v-for="cmd in lastCommandes"
-            :key="cmd.id"
-            class="border-b hover:bg-gray-50"
-          >
-            <td class="p-2 font-medium">{{ cmd.numero }}</td>
-            <td class="p-2">{{ cmd.nom_chauffeur }}</td>
-            <td class="p-2">{{ cmd.destination }}</td>
-            <td class="p-2">
-              <span
-                :class="{
-                  'text-yellow-600': cmd.statut === 'en_attente',
-                  'text-blue-600': cmd.statut === 'en_route',
-                  'text-green-600': cmd.statut === 'livree'
-                }"
-              >
-                {{ cmd.statut }}
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="overflow-x-auto">
+        <table class="min-w-full text-white">
+          <thead class="bg-[#20203D]">
+            <tr class="text-left text-xs text-gray-400 uppercase tracking-wider">
+              <th class="p-4 rounded-tl-lg">Numéro</th>
+              <th class="p-4">Chauffeur</th>
+              <th class="p-4">Destination</th>
+              <th class="p-4 rounded-tr-lg">Statut</th>
+            </tr>
+          </thead>
+          
+          <tbody>
+            <tr
+              v-for="cmd in lastCommandes"
+              :key="cmd.id"
+              class="border-b border-[#20203D] hover:bg-[#20203D]/50 transition duration-150"
+            >
+              <td class="p-4 font-medium text-white">{{ cmd.numero }}</td>
+              <td class="p-4 text-gray-300">{{ cmd.nom_chauffeur }}</td>
+              <td class="p-4 text-gray-300">{{ cmd.destination }}</td>
+              
+              <td class="p-4">
+                <span
+                  :class="{
+                    'bg-yellow-800/50 text-yellow-300 px-3 py-1 rounded-full text-xs font-semibold': cmd.statut === 'en_attente',
+                    'bg-blue-800/50 text-blue-300 px-3 py-1 rounded-full text-xs font-semibold': cmd.statut === 'en_route',
+                    'bg-green-800/50 text-green-300 px-3 py-1 rounded-full text-xs font-semibold': cmd.statut === 'livree'
+                  }"
+                >
+                  {{ cmd.statut.replace('_', ' ').toUpperCase() }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-      <p v-if="lastCommandes?.length === 0" class="text-center text-gray-500 py-4">
-        Aucune commande enregistrée.
+      <p v-if="lastCommandes?.length === 0" class="text-center text-gray-500 py-6">
+        Aucune commande récente à afficher.
       </p>
     </div>
   </div>

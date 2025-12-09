@@ -1,92 +1,132 @@
 <template>
-  <div class="p-6 bg-gray-50 min-h-screen">
-    <!-- Header -->
-    <div class="flex justify-between items-center mb-6">
-      <h1 class="text-2xl font-bold text-gray-800">
-        Détail du bon de commande #{{ commande.id }}
+  <div class="p-4 md:p-10 min-h-screen text-white" style="background-color: #1a1a2e;">
+    
+    <div class="flex justify-between items-center mb-10 border-b border-[#20203D] pb-4">
+      
+      <h1 class="text-3xl font-light text-white pl-4 tracking-wider" style="border-left: 4px solid #4C70FF;">
+        Détail du Bon de Commande #{{ commande.id }}
       </h1>
+      
       <router-link
         to="/dashboard"
-        class="bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition"
+        class="text-gray-300 px-4 py-2 rounded-md transition duration-200 text-sm font-medium border border-gray-700"
+        style="background-color: #20203D; hover:background-color: #33334d;"
       >
         ← Retour
       </router-link>
     </div>
 
-    <!-- Informations principales -->
-    <div class="grid md:grid-cols-2 gap-6 mb-8">
-      <div class="bg-white p-4 rounded-lg shadow">
-        <h2 class="text-lg font-semibold mb-3 text-gray-700">Informations Client</h2>
-        <p><strong>Nom du client :</strong> {{ commande.client }}</p>
-        <p><strong>Téléphone :</strong> {{ commande.telephone }}</p>
-        <p><strong>Ville de livraison :</strong> {{ commande.villeLivraison }}</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+      
+      <div class="p-6 rounded-xl shadow-xl border" style="background-color: #131326; border-color: #20203D;">
+        <h2 class="text-xl font-semibold mb-6 pb-3" style="color: #4C70FF; border-bottom: 1px solid #20203D;">Informations Client</h2>
+        
+        <p class="text-gray-300 my-3">
+          <span class="inline-block w-32 font-medium">Nom du client :</span> 
+          <span class="text-white">{{ commande.client }}</span>
+        </p>
+        <p class="text-gray-300 my-3">
+          <span class="inline-block w-32 font-medium">Téléphone :</span> 
+          <span class="text-white">{{ commande.telephone }}</span>
+        </p>
+        <p class="text-gray-300 my-3">
+          <span class="inline-block w-32 font-medium">Ville de livraison :</span> 
+          <span class="text-white">{{ commande.villeLivraison }}</span>
+        </p>
       </div>
 
-      <div class="bg-white p-4 rounded-lg shadow">
-        <h2 class="text-lg font-semibold mb-3 text-gray-700">Détails Commande</h2>
-        <p><strong>Date :</strong> {{ commande.date }}</p>
-        <p><strong>Produit :</strong> {{ commande.produit }}</p>
-        <p><strong>Quantité :</strong> {{ commande.quantite }} sacs</p>
-        <p><strong>Prix Unitaire :</strong> {{ formatPrix(commande.prixUnitaire) }}</p>
-        <p><strong>Prix Total :</strong> {{ formatPrix(commande.prixTotal) }}</p>
-      </div>
-    </div>
-
-    <!-- Suivi de l’état -->
-    <div class="bg-white p-4 rounded-lg shadow mb-8">
-      <h2 class="text-lg font-semibold mb-4 text-gray-700">Suivi de la commande</h2>
-      <div class="flex items-center justify-between">
-        <div
-          v-for="(step, index) in etapes"
-          :key="step"
-          class="flex flex-col items-center relative"
-        >
-          <div
-            class="w-8 h-8 rounded-full flex items-center justify-center"
-            :class="[
-              index <= etapes.indexOf(commande.etat)
-                ? 'bg-green-600 text-white'
-                : 'bg-gray-300 text-gray-500'
-            ]"
-          >
-            {{ index + 1 }}
-          </div>
-          <span class="text-sm mt-2 text-gray-600">{{ step }}</span>
-
-          <div
-            v-if="index < etapes.length - 1"
-            class="absolute top-4 left-8 w-24 h-1"
-            :class="[
-              index < etapes.indexOf(commande.etat)
-                ? 'bg-green-600'
-                : 'bg-gray-300'
-            ]"
-          ></div>
+      <div class="p-6 rounded-xl shadow-xl border" style="background-color: #131326; border-color: #20203D;">
+        <h2 class="text-xl font-semibold mb-6 pb-3" style="color: #4C70FF; border-bottom: 1px solid #20203D;">Détails Commande</h2>
+        
+        <div class="flex justify-between items-center text-gray-300 my-3">
+          <span class="font-medium">Date :</span> 
+          <span class="text-white">{{ commande.date }}</span>
+        </div>
+        <div class="flex justify-between items-center text-gray-300 my-3">
+          <span class="font-medium">Produit :</span> 
+          <span class="text-white">{{ commande.produit }}</span>
+        </div>
+        <div class="flex justify-between items-center text-gray-300 my-3">
+          <span class="font-medium">Quantité :</span> 
+          <span class="text-white font-semibold">{{ commande.quantite }} sacs</span>
+        </div>
+        <div class="flex justify-between items-center text-gray-300 my-3">
+          <span class="font-medium">Prix Unitaire :</span> 
+          <span class="font-semibold" style="color: #10B981;">{{ formatPrix(commande.prixUnitaire) }}</span> 
+        </div>
+        <div class="flex justify-between items-center text-gray-300 my-3 pt-3 mt-3" style="border-top: 1px solid #20203D;">
+          <span class="font-bold">Prix Total :</span> 
+          <span class="text-2xl font-extrabold" style="color: #00f0ff;">{{ formatPrix(commande.prixTotal) }}</span>
         </div>
       </div>
     </div>
 
-    <!-- Actions -->
-    <div class="flex gap-4">
+    <div class="p-6 rounded-xl shadow-xl border" style="background-color: #131326; border-color: #20203D; margin-bottom: 40px;">
+      <h2 class="text-xl font-semibold mb-8 pb-3" style="color: #4C70FF; border-bottom: 1px solid #20203D;">Suivi de la commande</h2>
+      
+      <div class="flex items-start justify-between relative w-full pt-4 pb-2">
+        
+        <div
+          v-for="(step, index) in etapes"
+          :key="step"
+          class="flex flex-col items-center relative flex-1"
+        >
+          <div
+            v-if="index < etapes.length - 1"
+            class="absolute top-4 left-[calc(50%+16px)] h-1"
+            :class="[
+              // Bleu de progression
+              index < etapes.indexOf(commande.etat) ? 'bg-blue-600' : 'bg-gray-700'
+            ]"
+            style="width: calc(100% - 32px); background-color: #4C70FF;"
+          ></div>
+          
+          <div
+            class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm z-20 transition-all duration-300"
+            :class="[
+              // Bleu actif
+              index <= etapes.indexOf(commande.etat) ? 'text-white shadow-md shadow-blue-500/50' : 'text-gray-400'
+            ]"
+            :style="{ 
+                backgroundColor: index <= etapes.indexOf(commande.etat) ? '#4C70FF' : '#4b5563',
+                borderColor: index <= etapes.indexOf(commande.etat) ? '#4C70FF' : '#4b5563'
+            }"
+          >
+            {{ index + 1 }}
+          </div>
+          
+          <span class="text-xs mt-3 font-medium text-center max-w-[100px]"
+                :class="[index <= etapes.indexOf(commande.etat) ? 'text-white' : 'text-gray-500']">
+              {{ step }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-4 mt-10">
       <button
-        class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
+        class="text-white px-6 py-3 rounded-lg font-semibold transition duration-200 flex-1 min-w-[150px] shadow-lg"
+        style="background-color: #4C70FF; hover:background-color: #3b5cb7;" 
       >
         Modifier
       </button>
+      
       <button
-        class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition"
+        class="text-white px-6 py-3 rounded-lg font-semibold transition duration-200 flex-1 min-w-[150px] shadow-lg"
+        style="background-color: #10B981; hover:background-color: #0c8c62;" 
       >
         Marquer comme livré
       </button>
+      
       <button
-        class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition"
+        class="text-white px-6 py-3 rounded-lg font-semibold transition duration-200 flex-1 min-w-[150px] shadow-lg"
+        style="background-color: #EF4444; hover:background-color: #cc3737;"
       >
         Supprimer
       </button>
     </div>
   </div>
 </template>
-
 <script setup>
 import { ref } from "vue";
 import { useRoute } from "vue-router";
