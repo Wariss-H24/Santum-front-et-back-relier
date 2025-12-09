@@ -1,5 +1,9 @@
 <script setup>
 import { ref } from 'vue';
+import axios from 'axios';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 const status = ref(null);
 
@@ -10,12 +14,14 @@ const form = ref({
 
 const isLoading = ref(false);
 
+
+const apiUrl = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api';
 const submit = async () => {
     try {
         isLoading.value = true;
 
         // Exemple d'appel API (à adapter)
-        const res = await fetch('/api/login', {
+        const res = await fetch(`${apiUrl}/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -24,7 +30,7 @@ const submit = async () => {
         });
 
         const data = await res.json();
-
+        sessionStorage.setItem("token", data.token)
         if (!res.ok) {
             status.value = data.message || "Erreur de connexion";
             return;
@@ -34,7 +40,8 @@ const submit = async () => {
         console.log("Utilisateur connecté :", data);
 
         // Redirection manuelle
-        window.location.href = "/dashboard";
+        router.push({ name: "dashboard" });
+
 
     } catch (error) {
         console.error(error);

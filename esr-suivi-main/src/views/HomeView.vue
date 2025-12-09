@@ -36,7 +36,7 @@ const goTo = (path) => {
 </script>
 
 <template>
-    <div class="flex min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors">
+    <div class="flex min-h-screen bg-gradient-to-br from-green-400 via-yellow-100 to-green-500 dark:bg-gray-900 transition-colors">
 
         <!-- SIDEBAR (Desktop) -->
         <div
@@ -113,7 +113,7 @@ const goTo = (path) => {
 
             <!-- TOPBAR -->
             <header
-                class="h-16 bg-white dark:bg-gray-800 shadow-md px-4 flex items-center justify-between
+                class="h-16 bg-yellow-50 dark:bg-gray-800 shadow-md px-4 flex items-center justify-between
                        border-b border-gray-200 dark:border-gray-700"
             >
                 <!-- MENU ICON MOBILE -->

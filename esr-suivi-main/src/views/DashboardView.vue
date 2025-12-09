@@ -1,4 +1,17 @@
 <template>
+
+  <!-- <div>
+    <h2>Infos utilisateur</h2>
+
+    <p><strong>Token :</strong> {{ data.token }}</p>
+    <p><strong>Type :</strong> {{ data.token_type }}</p>
+
+    <h3>Détails de l'utilisateur</h3>
+    <p><strong>ID :</strong> {{ data.user.id }}</p>
+    <p><strong>Nom :</strong> {{ data.user.name }}</p>
+    <p><strong>Email :</strong> {{ data.user.email }}</p>
+    <p><strong>Rôle :</strong> {{ data.user.role }}</p>
+  </div> -->
   <div class="p-4 md:p-8">
     
     <h2 class="text-3xl font-light text-white border-l-4 border-[#4C70FF] pl-4 mb-10 tracking-wider">
@@ -107,7 +120,7 @@
 </template>
 
 <script setup>
-import { computed } from "vue"
+import { computed, ref } from "vue"
 import { useCommandeStore } from "@/stores/commandeStore"
 
 // Icônes Lucide
@@ -119,6 +132,18 @@ const total = computed(() => store.commandes.length)
 const enAttente = computed(() => store.commandes.filter(c => c.statut === "en_attente").length)
 const enRoute = computed(() => store.commandes.filter(c => c.statut === "en_route").length)
 const livrees = computed(() => store.commandes.filter(c => c.statut === "livree").length)
+// const authStore = useAuthStore() 
+// Initialiser le store d'authentification
+
+
+
+
+// Lier 'data' aux données du store (en lecture seule)
+// const data = computed(() => ({
+//   token: authStore.token,
+//   token_type: authStore.tokenType,
+//   user: authStore.user
+// }));
 
 const statsCards = computed(() => [
   {
