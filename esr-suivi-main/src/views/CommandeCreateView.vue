@@ -2,7 +2,7 @@
   <div class="p-6 max-w-3xl mx-auto">
     <h2 class="text-2xl font-bold mb-6">Créer un bon de commande</h2>
 
-    <form @submit.prevent="handleSubmit" class="space-y-4 bg-white shadow rounded p-6">
+    <form @submit.prevent="handleSubmit" class="space-y-4 bg-white texte-black shadow rounded p-6">
 
       <!-- Fournisseur -->
       <div>

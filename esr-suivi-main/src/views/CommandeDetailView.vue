@@ -107,22 +107,22 @@
   
       <div class="flex flex-wrap gap-4 mt-10">
         <button
-          class="text-white px-6 py-3 rounded-lg font-semibold transition duration-200 flex-1 min-w-[150px] shadow-lg"
-          style="background-color: #4C70FF; hover:background-color: #3b5cb7;" 
+          class="text-white px-6 py-3 rounded-lg font-semibold transition hover:bg-[#3b5cb7] duration-200 flex-1 min-w-[150px] shadow-lg"
+          style="background-color: #4C70FF;" 
         >
           Modifier
         </button>
         
         <button
-          class="text-white px-6 py-3 rounded-lg font-semibold transition duration-200 flex-1 min-w-[150px] shadow-lg"
-          style="background-color: #10B981; hover:background-color: #0c8c62;" 
+          class="text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#0c8c62] transition duration-200 flex-1 min-w-[150px] shadow-lg"
+          style="background-color: #10B981;" 
         >
           Marquer comme livré
         </button>
         
         <button
-          class="text-white px-6 py-3 rounded-lg font-semibold transition duration-200 flex-1 min-w-[150px] shadow-lg"
-          style="background-color: #EF4444; hover:background-color: #cc3737;"
+          class="text-white px-6 py-3 rounded-lg font-semibold transition hover:bg-[#cc3737]duration-200 flex-1 min-w-[150px] shadow-lg"
+          style="background-color: #EF4444; "
         >
           Supprimer
         </button>

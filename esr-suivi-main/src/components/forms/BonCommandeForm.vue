@@ -3,7 +3,7 @@
     <h2 class="text-2xl font-bold mb-6">Créer un bon de commande</h2>
 
     <form @submit.prevent="handleSubmit" 
-      class="space-y-4 bg-white shadow rounded p-6">
+      class="space-y-4 bg-white text-black shadow rounded p-6">
 
       <!-- Ligne 1 : Fournisseur + Type ciment -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -153,9 +153,25 @@ const form = reactive({
   date: new Date().toISOString().slice(0, 10),
   statut: 'en_attente'
 })
-
-const handleSubmit = () => {
-  store.addCommande({ ...form })
-  router.push('/commandes')
-}
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+  
+const handleSubmit = async () => {
+  try {
+    const response = await fetch(`${API_URL}/commandes`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(form),
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log('Success:', data)
+      store.addCommande(data); 
+    })
+   
+  } catch (error) {
+    console.error('Erreur :', error);
+  }
+};
 </script>
