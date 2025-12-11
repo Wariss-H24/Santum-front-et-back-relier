@@ -8,9 +8,9 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-
 Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login']);
 
+Route::middleware('auth:sanctum')->group(function () {
 // API pour afficher toutes les commandes
 Route::get('/commandes', [CommandeController::class, 'index']);
 
@@ -25,3 +25,4 @@ Route::put('/commandes/{id}', [CommandeController::class, 'update']);
 
 // API pour supprimer une commande
 Route::delete('/commandes/{id}', [CommandeController::class, 'destroy']);
+});
