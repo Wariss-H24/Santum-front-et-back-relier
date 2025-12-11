@@ -18,7 +18,7 @@ api.interceptors.request.use(config => {
   router.replace({name : 'login'});
  }
 
- config.headers.['Authorization'] = `Bearer ${token}`;
+ config.headers['Authorization'] = `Bearer ${token}`;
   return config;
 });
 

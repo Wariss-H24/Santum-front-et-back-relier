@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import CommandesListView from '@/views/CommandesListView.vue'
 import CommandeCreateView from '@/views/CommandeCreateView.vue'
 import CommandeDetailView from '@/views/CommandeDetailView.vue'
+import CommandeEditView from '@/views/CommandeEditView.vue'
 
 const routes = [
   {
@@ -19,7 +20,8 @@ const routes = [
       { path: 'dashboard', name: 'dashboard', component: () => import('@/views/DashboardView.vue') },
       { path: 'commandes', name: 'commandes', component: CommandesListView },
   { path: 'commandes/create', name: 'create-commande', component: CommandeCreateView },
-  { path: 'commandes/:id', name: 'commande-detail', component: CommandeDetailView, props: true }
+  { path: 'commandes/:id', name: 'commande-detail', component: CommandeDetailView, props: true },
+  {path : 'commandes/:id/edit', name: 'edit-commande', component: CommandeEditView, props: true}
     ]
   }
 ]

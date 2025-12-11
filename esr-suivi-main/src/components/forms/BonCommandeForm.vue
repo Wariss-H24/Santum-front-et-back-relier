@@ -137,7 +137,7 @@
 import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCommandeStore } from '@/stores/commandeStore'
-
+import api from '@/utils/axiosConfig'
 const router = useRouter()
 const store = useCommandeStore()
 
@@ -160,13 +160,9 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
   
 const handleSubmit = async () => {
   try {
-    const res = await fetch(`${API_URL}/commandes`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form)
-    })
+    const res = await api.post(`/commandes`,form)
 
-    const data = await res.json()
+    const data = await res.data
 
     store.addCommande(data)
 

@@ -8,14 +8,35 @@ const store = useCommandeStore()
 const { commandes, loading } = storeToRefs(store)
 
 const commandesForm = ref(false)
+const deleteModalId= ref(null)
 
+// Ouvre le modal pour confirmer la suppression
+const openDeleteModal = (id) => {
+  deleteModalId.value = id
+}
+// Ferme le modal sans supprimer
+const closeDeleteModal = () => {
+  deleteModalId.value = null
+}
 const openCommandeForm = () => commandesForm.value = true
 const closeCommandeForm = () => commandesForm.value = false
 
-const confirmDelete = async (id) => {
-  if (!confirm('Confirmer la suppression du bon de commande ?')) return
-  await store.deleteCommande(id);
+// Supprime réellement la commande
+const confirmDelete = async () => {
+  if (!deleteModalId.value) return
+  await store.deleteCommande(deleteModalId.value)
+  deleteModalId.value = null
 }
+
+
+const changeStatus = async (id, newStatut) => {
+  try {
+    await store.changeStatut(id, newStatut) // fonction que tu ajouteras dans le store
+  } catch (error) {
+    console.error("Erreur lors du changement de statut :", error)
+  }
+}
+
 
 onMounted(async () => {
   await store.fetchCommandes()
@@ -99,7 +120,7 @@ onMounted(async () => {
                   Détails
                 </RouterLink>
 
-                <button @click.prevent="confirmDelete(cmd.id)" class="text-red-400 hover:text-red-200">
+                <button @click.prevent="openDeleteModal(cmd.id)" class="text-red-400 hover:text-red-200">
                   Supprimer
                 </button>
               </div>
@@ -107,6 +128,17 @@ onMounted(async () => {
           </tr>
         </tbody>
       </table>
+       <!-- MODAL DE SUPPRESSION -->
+    <div v-if="deleteModalId" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+      <div class="bg-[#131326] text-white rounded-xl shadow-2xl w-[90%] max-w-md p-6 border border-[#20203D]">
+        <h3 class="text-xl font-semibold mb-4">Confirmer la suppression</h3>
+        <p class="mb-6">Êtes-vous sûr de vouloir supprimer ce bon de commande ? Cette action est irréversible.</p>
+        <div class="flex justify-end gap-4">
+          <button @click="closeDeleteModal" class="px-4 py-2 rounded bg-gray-500 hover:bg-gray-600">Annuler</button>
+          <button @click="confirmDelete" class="px-4 py-2 rounded bg-red-600 hover:bg-red-700">Supprimer</button>
+        </div>
+      </div>
+    </div>
     </div>
 
     <!-- MODAL -->
