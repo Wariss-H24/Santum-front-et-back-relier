@@ -18,8 +18,8 @@ const routes = [
     children: [
       { path: 'dashboard', name: 'dashboard', component: () => import('@/views/DashboardView.vue') },
       { path: 'commandes', name: 'commandes', component: CommandesListView },
-      { path: 'commandes/create', name: 'create-commande', component: CommandeCreateView },
-      { path: 'commandes/:id', name: 'commande-detail', component: CommandeDetailView, props: true }
+  { path: 'commandes/create', name: 'create-commande', component: CommandeCreateView },
+  { path: 'commandes/:id', name: 'commande-detail', component: CommandeDetailView, props: true }
     ]
   }
 ]

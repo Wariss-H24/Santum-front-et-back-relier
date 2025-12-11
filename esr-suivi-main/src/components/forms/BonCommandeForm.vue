@@ -141,6 +141,9 @@ import { useCommandeStore } from '@/stores/commandeStore'
 const router = useRouter()
 const store = useCommandeStore()
 
+//pour fermer le modal
+const emit = defineEmits(['close'])
+
 const form = reactive({
   fournisseur: '',
   type_ciment: '',
@@ -157,21 +160,22 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
   
 const handleSubmit = async () => {
   try {
-    const response = await fetch(`${API_URL}/commandes`, {
+    const res = await fetch(`${API_URL}/commandes`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(form),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(form)
     })
-    .then(res => res.json())
-    .then(data => {
-      console.log('Success:', data)
-      store.addCommande(data); 
-    })
-   
+
+    const data = await res.json()
+
+    store.addCommande(data)
+
+     //⬇FERMETURE AUTOMATIQUE DU FORMULAIRE
+    emit('close')
+
   } catch (error) {
-    console.error('Erreur :', error);
+    console.error('Erreur :', error)
   }
-};
+}
+
 </script>

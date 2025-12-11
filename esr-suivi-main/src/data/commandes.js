@@ -24,7 +24,7 @@ export const commandes = [
     num_camion: 'CF02133',
     num_permis: '12205699',
     destination: 'PORTO-NOVO',
-    statut: 'livree',
+    statut: 'livrer',
     date: '2025-10-20'
   }
 ]

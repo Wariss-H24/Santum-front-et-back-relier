@@ -101,7 +101,7 @@
                   :class="{
                     'bg-yellow-800/50 text-yellow-300 px-3 py-1 rounded-full text-xs font-semibold': cmd.statut === 'en_attente',
                     'bg-blue-800/50 text-blue-300 px-3 py-1 rounded-full text-xs font-semibold': cmd.statut === 'en_route',
-                    'bg-green-800/50 text-green-300 px-3 py-1 rounded-full text-xs font-semibold': cmd.statut === 'livree'
+                    'bg-green-800/50 text-green-300 px-3 py-1 rounded-full text-xs font-semibold': cmd.statut === 'livrer'
                   }"
                 >
                   {{ cmd.statut.replace('_', ' ').toUpperCase() }}
@@ -131,7 +131,7 @@ const store = useCommandeStore()
 const total = computed(() => store.commandes.length)
 const enAttente = computed(() => store.commandes.filter(c => c.statut === "en_attente").length)
 const enRoute = computed(() => store.commandes.filter(c => c.statut === "en_route").length)
-const livrees = computed(() => store.commandes.filter(c => c.statut === "livree").length)
+const livrees = computed(() => store.commandes.filter(c => c.statut === "livrer").length)
 // const authStore = useAuthStore() 
 // Initialiser le store d'authentification
 
