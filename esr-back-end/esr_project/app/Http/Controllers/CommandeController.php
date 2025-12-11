@@ -27,7 +27,6 @@ class CommandeController extends Controller
             'num_permis' => 'required|string',
             'destination' => 'required|string',
             'date' => 'required|date',
-            // use in: to validate enum values
             'statut' => 'nullable|in:livrer,en_attente',
         ]);
 
