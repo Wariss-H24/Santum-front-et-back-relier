@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CommandesExport;
 use Illuminate\Http\Request;
 use App\Models\Commande;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CommandeController extends Controller
 {
@@ -72,5 +74,10 @@ class CommandeController extends Controller
         $commande->delete();
 
         return response()->json(null, 204);
+    }
+
+    public function export()
+    {
+        return Excel::download(new CommandesExport, 'commandes.xlsx');
     }
 }

@@ -26,3 +26,6 @@ Route::put('/commandes/{id}', [CommandeController::class, 'update']);
 // API pour supprimer une commande
 Route::delete('/commandes/{id}', [CommandeController::class, 'destroy']);
 });
+
+// Export commandes to Excel
+Route::get('/commandes-export', [CommandeController::class, 'export']);
