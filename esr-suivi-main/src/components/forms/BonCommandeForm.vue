@@ -122,7 +122,7 @@
       <div class="flex justify-end pt-4">
         <button
           type="submit"
-          class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
+          class="bg-gradient-to-r from-emerald-600 to-lime-600 rounded-lg text-white font-bold text-sm shadow-lg hover:shadow-emerald-500/30 transform px-5 py-2"
         >
           Enregistrer
         </button>

@@ -37,6 +37,10 @@ const changeStatus = async (id, newStatut) => {
   }
 }
 
+// 
+const exportExcel = () => {
+  window.location.href = "http://127.0.0.1:8000/api/commandes-export"
+}
 
 onMounted(async () => {
   await store.fetchCommandes()
@@ -47,9 +51,12 @@ onMounted(async () => {
   <div class="p-8">
     
     <!-- HEADER -->
-    <div class="flex justify-between items-center mb-100">
+    <div class="flex justify-between items-center mb">
       <h2 class="text-3xl font-light pl-4 tracking-wider">Liste des Bons de Commande</h2>
       
+      <button @click="exportExcel" class="export-btn text-wihite font-semibold  mr-4">
+         Exporter Les Données
+      </button>
       <button
         @click="openCommandeForm"
         class="relative px-6 py-3 rounded-lg font-semibold text-white overflow-hidden 
@@ -215,6 +222,29 @@ onMounted(async () => {
 .custom-gradient-btn:hover .relative {
   transform: translateY(0); /* Le texte ne bouge pas au survol */
 }
+
+.mb{
+  margin-bottom: 20px; 
+}
+
+.export-btn {
+  background: linear-gradient(135deg, #217346, #fdd835); /* vert Excel → jaune */
+  color: #000000; /* noir subtil pour le texte */
+  font-weight: 700;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  transition: all 0.3s ease;
+}
+
+.export-btn:hover {
+  background: linear-gradient(135deg, #1e6b3d, #fbc02d);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+}
+
 </style>
 
 

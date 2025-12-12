@@ -12,13 +12,13 @@
     <p><strong>Email :</strong> {{ data.user.email }}</p>
     <p><strong>Rôle :</strong> {{ data.user.role }}</p>
   </div> -->
-  <div class="p-4 md:p-8">
+  <div class="p-4 md:p-8 ">
     
-    <h2 class="text-3xl font-light text-white border-l-4 border-[#4C70FF] pl-4 mb-10 tracking-wider">
+    <h2 class="text-3xl font-light text-black border-l-4 border-[#4C70FF] rounded-2xl pl-4 mb-10 tracking-wider mb">
       Tableau de Bord
     </h2>
     
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 mb-20">
       
       <div
         v-for="card in statsCards"
@@ -61,11 +61,11 @@
       </div>
     </div>
 
-    <hr class="border-t border-[#20203D] my-10" />
+   
 
-    <div class="bg-[#131326] rounded-xl shadow-2xl p-6 md:p-8">
+    <div class="bg-[#131326] rounded-xl shadow-2xl p-6 md:p-8 margin">
       
-      <div class="flex justify-between items-center mb-6">
+      <div class="flex justify-between items-center ">
         <h3 class="text-xl font-semibold text-white">Dernières Commandes</h3>
         <RouterLink
           to="/commandes"
@@ -173,3 +173,11 @@ const statsCards = computed(() => [
 ])
 </script>
 
+<style>
+  .mb{
+    margin-block: 20px;
+  }
+  .margin{
+    margin-top: 50px;
+  }
+</style>
